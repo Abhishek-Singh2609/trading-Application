@@ -1,22 +1,26 @@
 {
     "projects": [
       {
-        "name": "frontend",
-        "root": "frontend",
-        "buildCommand": "npm run build",
-        "outputDirectory": "build"
+        "src": "frontend/package.json",
+        "use": "@vercel/next"
       },
       {
-        "name": "backend",
-        "root": "backend",
-        "buildCommand": "npm run build",
-        "outputDirectory": "dist"
+        "src": "backend/package.json",
+        "use": "@vercel/node"
       },
       {
-        "name": "dashboard",
-        "root": "dashboard",
-        "buildCommand": "npm run build",
-        "outputDirectory": "build"
+        "src": "dashboard/package.json",
+        "use": "@vercel/next"
+      }
+    ],
+    "routes": [
+      {
+        "src": "/api/(.*)",
+        "dest": "/backend/$1"
+      },
+      {
+        "src": "/(.*)",
+        "dest": "/frontend/$1"
       }
     ]
   }
