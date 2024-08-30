@@ -1,0 +1,23 @@
+{
+    "projects": [
+      {
+        "name": "frontend",
+        "root": "frontend",
+        "buildCommand": "npm run build",
+        "outputDirectory": "build"
+      },
+      {
+        "name": "backend",
+        "root": "backend",
+        "buildCommand": "npm run build",
+        "outputDirectory": "dist"
+      },
+      {
+        "name": "dashboard",
+        "root": "dashboard",
+        "buildCommand": "npm run build",
+        "outputDirectory": "build"
+      }
+    ]
+  }
+  
