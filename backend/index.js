@@ -29,7 +29,11 @@ app.use(express.json());
 
 
 app.use("/", authRoute);
-
+// Example route
+app.get('/', (req, res) => {
+    res.send('Hello World');
+  });
+  
 
 
 //  app.get("/addHoldings", async (req, res) => {
