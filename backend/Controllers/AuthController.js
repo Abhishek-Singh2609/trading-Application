@@ -17,9 +17,10 @@ module.exports.Signup = async (req, res, next) => {
     });
     res
       .status(201)
-      .json({ message: "User signed in successfully", success: true, user });
-    // Redirect to the dashboard after signup
-    res.redirect("https://trading-application-nw4v.vercel.app");
+      .json({ message: "User signed in successfully", success: true, user,
+        redirectUrl: "https://trading-application-nw4v.vercel.app" 
+       });
+   
     next();
   } catch (error) {
     console.error(error);
@@ -48,9 +49,9 @@ module.exports.Login = async (req, res, next) => {
     });
     res
       .status(201)
-      .json({ message: "User logged in successfully", success: true });
-    // Redirect to the dashboard after signup
-    res.redirect("https://trading-application-nw4v.vercel.app");
+      .json({ message: "User logged in successfully", success: true,
+        redirectUrl: "https://trading-application-nw4v.vercel.app" 
+       });
     next();
   } catch (error) {
     console.error(error);
