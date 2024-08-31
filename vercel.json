@@ -1,16 +1,39 @@
 {
-    "redirects": [
+    "builds": [
       {
-        "source": "/api/(.*)",
-        "destination": "https://trading-application-mauve.vercel.app/api/$1"
+        "src": "frontend/package.json",
+        "use": "@vercel/static-build",
+        "config": {
+          "distDir": "build"
+        }
       },
       {
-        "source": "/(.*)",
-        "destination": "https://trading-application-2l3o.vercel.app/$1"
+        "src": "backend/package.json",
+        "use": "@vercel/node",
+        "config": {
+          "outputDirectory": "dist"
+        }
       },
       {
-        "source": "/dashboard/(.*)",
-        "destination": "https://trading-application-nw4v.vercel.app/$1"
+        "src": "dashboard/package.json",
+        "use": "@vercel/static-build",
+        "config": {
+          "distDir": "build"
+        }
+      }
+    ],
+    "routes": [
+      {
+        "src": "/api/(.*)",
+        "dest": "/backend/$1"
+      },
+      {
+        "src": "/(.*)",
+        "dest": "/frontend/$1"
+      },
+      {
+        "src": "/dashboard/(.*)",
+        "dest": "/dashboard/$1"
       }
     ]
   }
