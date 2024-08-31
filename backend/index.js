@@ -216,20 +216,47 @@ app.get('/', (req, res) => {
 //      res.send("Done!");
 //    });
 
-app.get("/allHoldings",async (req,res)=>{
-    let allholdings= await HoldingsModel.find({})
-    res.json(allholdings)
-})
-app.get("/allPositions",async (req,res)=>{
-    let allpositions= await PositionsModel.find({})
-    res.json(allpositions)
-})
+app.get("/allHoldings", async (req, res) => {
+    try {
+      const allHoldings = await HoldingsModel.find({});
+      res.json(allHoldings);
+    } catch (error) {
+      console.error("Error fetching all holdings:", error);
+      res.status(500).send("An error occurred while fetching holdings.");
+    }
+  });
+  
+  app.get("/allPositions", async (req, res) => {
+    try {
+      const allPositions = await PositionsModel.find({});
+      res.json(allPositions);
+    } catch (error) {
+      console.error("Error fetching all positions:", error);
+      res.status(500).send("An error occurred while fetching positions.");
+    }
+  });
+  
 
 
 
-app.listen(PORT ,()=>{
-    console.log(`App started! Server is running on port ${PORT}`);
-    mongoose.connect(uri);
-    console.log("DB started!"); 
+// app.listen(PORT ,()=>{
+//     console.log(`App started! Server is running on port ${PORT}`);
+//     mongoose.connect(uri);
+//     console.log("DB started!"); 
 
-});
+// });
+async function startServer() {
+    try {
+      await mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+      console.log("DB started!");
+  
+      app.listen(PORT, () => {
+        console.log(`App started! Server is running on port ${PORT}`);
+      });
+    } catch (error) {
+      console.error("DB connection error:", error);
+    }
+  }
+  
+  startServer();
+  

@@ -9,7 +9,7 @@ const Holdings =()=>{
   const [allHoldings, setAllHoldings] = useState([]);
 
   useEffect(() => {
-    axios.get("https://trading-application-brown.vercel.app/allHoldings").then((res) => {
+    axios.get("https://trading-application-mauve.vercel.app/allHoldings").then((res) => {
       console.log(res.data);
       setAllHoldings(res.data);
     });
