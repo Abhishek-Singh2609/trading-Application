@@ -1,15 +1,41 @@
 {
     "version": 2,
-    "builds": [
+    "projects": [
       {
-        "src": "backend/server.js",
-        "use": "@vercel/node"
-      }
-    ],
-    "routes": [
+        "name": "frontend",
+        "root": "frontend",
+        "builds": [
+          {
+            "src": "frontend/package.json",
+            "use": "@vercel/static-build",
+            "config": {
+              "distDir": "frontend/build"
+            }
+          }
+        ]
+      },
       {
-        "src": "/(.*)",
-        "dest": "/backend/server.js"
+        "name": "backend",
+        "root": "backend",
+        "builds": [
+          {
+            "src": "backend/index.js",
+            "use": "@vercel/node"
+          }
+        ]
+      },
+      {
+        "name": "dashboard",
+        "root": "dashboard",
+        "builds": [
+          {
+            "src": "dashboard/package.json",
+            "use": "@vercel/static-build",
+            "config": {
+              "distDir": "dashboard/build"
+            }
+          }
+        ]
       }
     ]
   }

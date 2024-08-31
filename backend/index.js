@@ -16,7 +16,7 @@ const PORT = process.env.PORT || 3002;
 const uri = process.env.MONGO_URL;
 app.use(cors(
     {
-        origin: ["trading-application-nw4v.vercel.app"],
+        origin: ['https://trading-application-2l3o.vercel.app', 'https://trading-application-nw4v.vercel.app'],
         methods: ["GET", "POST", "PUT", "DELETE"],
         credentials: true,
       }
@@ -224,7 +224,7 @@ app.get("/allPositions",async (req,res)=>{
 
 
 app.listen(PORT ,()=>{
-    console.log("App started!");
+    console.log(`App started! Server is running on port ${PORT}`);
     mongoose.connect(uri);
     console.log("DB started!"); 
 
