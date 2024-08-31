@@ -1,41 +1,16 @@
 {
-    "version": 2,
-    "projects": [
+    "redirects": [
       {
-        "name": "frontend",
-        "root": "frontend",
-        "builds": [
-          {
-            "src": "frontend/package.json",
-            "use": "@vercel/static-build",
-            "config": {
-              "distDir": "frontend/build"
-            }
-          }
-        ]
+        "source": "/api/(.*)",
+        "destination": "https://trading-application-mauve.vercel.app/api/$1"
       },
       {
-        "name": "backend",
-        "root": "backend",
-        "builds": [
-          {
-            "src": "backend/index.js",
-            "use": "@vercel/node"
-          }
-        ]
+        "source": "/(.*)",
+        "destination": "https://trading-application-2l3o.vercel.app/$1"
       },
       {
-        "name": "dashboard",
-        "root": "dashboard",
-        "builds": [
-          {
-            "src": "dashboard/package.json",
-            "use": "@vercel/static-build",
-            "config": {
-              "distDir": "dashboard/build"
-            }
-          }
-        ]
+        "source": "/dashboard/(.*)",
+        "destination": "https://trading-application-nw4v.vercel.app/$1"
       }
     ]
   }
