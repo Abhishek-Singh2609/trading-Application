@@ -191,3 +191,12 @@ a{
   border-radius: 10px;
   border: none;
 }
+
+/* sudo selectors */
+
+.menu:hover {
+  color: rgb(245, 104, 52);
+}
+ .menu.selected {
+  color: rgb(245, 104, 52);
+}

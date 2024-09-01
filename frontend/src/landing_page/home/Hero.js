@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 
 function Hero() {
 
-
   return (
     <div className='container mb-5'>
       <div className='row text-center'>

@@ -40,7 +40,7 @@ const Signup = () => {
         },
         { withCredentials: true }
       );
-      const { success, message } = data;
+      const { success, message,redirectUrl } = data;
       if (success) {
         handleSuccess(message);
         setTimeout(() => {
