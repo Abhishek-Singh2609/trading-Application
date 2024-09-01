@@ -11,6 +11,9 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+*{
+  scroll-behavior: smooth;
+}
 
 .dashboard-container {
   width: 100%;
