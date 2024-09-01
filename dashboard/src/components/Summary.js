@@ -1,6 +1,55 @@
 import React from "react";
+import { useEffect, useState, useCallback } from "react";
+import { useNavigate } from "react-router-dom";
+import { useCookies } from "react-cookie";
+import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
 
 const Summary = () => {
+  
+  const navigate = useNavigate();
+  const [cookies, removeCookie] = useCookies([]);
+  const [username, setUsername] = useState("");
+  const [toastShown, setToastShown] = useState(false);
+
+  const verifyCookie = useCallback(async () => {
+    // Check if the token exists; if not, return early (no redirect)
+    if (!cookies.token) {
+      return;
+    }
+
+    try {
+      const { data } = await axios.post(
+        "https://trading-application-mauve.vercel.app",
+        {},
+        { withCredentials: true }
+      );
+
+      const { status, user } = data;
+      if (status) {
+        setUsername(user);
+        // Check if the toast has already been shown
+        if (!toastShown) {
+          toast(`Hello ${user}`, {
+            position: "top-right",
+          });
+          setToastShown(true);
+        }
+      } else {
+        removeCookie("token");
+        navigate("/login");
+      }
+    } catch (error) {
+      console.error("Error verifying cookie:", error);
+      removeCookie("token");
+      navigate("/login");
+    }
+  }, [cookies, navigate, removeCookie, toastShown]);
+
+  useEffect(() => {
+    verifyCookie();
+  }, [verifyCookie]);
+
   return (
     <>
       <div className="username">
@@ -57,6 +106,7 @@ const Summary = () => {
         </div>
         <hr className="divider" />
       </div>
+      <ToastContainer />
     </>
   );
 };

@@ -44,7 +44,9 @@ const Signup = () => {
       if (success) {
         handleSuccess(message);
         setTimeout(() => {
-          navigate("/");
+          // navigate("/"); using can go to frontend homepage
+          window.location.href = redirectUrl; // Redirect to dashboard
+
         }, 1000);
       } else {
         handleError(message);
