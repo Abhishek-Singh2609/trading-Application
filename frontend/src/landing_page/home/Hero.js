@@ -1,24 +1,26 @@
-import React from 'react'
-import { useEffect, useState,useCallback } from "react";
+import React from 'react';
+import { useEffect, useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import { Link } from 'react-router-dom';
+
 function Hero() {
   const navigate = useNavigate();
   const [cookies, removeCookie] = useCookies([]);
   const [username, setUsername] = useState("");
   const [toastShown, setToastShown] = useState(false);
+
   const verifyCookie = useCallback(async () => {
+    // Check if the token exists; if not, return early (no redirect)
     if (!cookies.token) {
-      navigate("/login");
       return;
     }
 
     try {
       const { data } = await axios.post(
-        "http://localhost:3002",
+        "https://trading-application-mauve.vercel.app",
         {},
         { withCredentials: true }
       );
@@ -47,23 +49,23 @@ function Hero() {
   useEffect(() => {
     verifyCookie();
   }, [verifyCookie]);
- 
+
   return (
     <div className='container mb-5'>
-       <div className='row text-center '>
-      <img src='media/images/homeHero.png' alt='Hero Image' className='mb-5' />
-      <h1 className='mt-5'>Invest in everything</h1>
-      <p>
-      Online platform to invest in stocks, derivatives, mutual funds, and
-      more </p>
-      <Link to="/signup" className="p-2 btn btn-primary fs-5 mb-5" style={{ width: "18%", margin: "0 auto", textDecoration: 'none' }}>
-      Signup Now
-    </Link>
-       </div>
-       <ToastContainer />
-
-       </div>
-  )
+      <div className='row text-center'>
+        <img src='media/images/homeHero.png' alt='Hero Image' className='mb-5' />
+        <h1 className='mt-5'>Invest in everything</h1>
+        <p>
+          Online platform to invest in stocks, derivatives, mutual funds, and
+          more
+        </p>
+        <Link to="/signup" className="p-2 btn btn-primary fs-5 mb-5" style={{ width: "18%", margin: "0 auto", textDecoration: 'none' }}>
+          Signup Now
+        </Link>
+      </div>
+      <ToastContainer />
+    </div>
+  );
 }
 
-export default Hero
+export default Hero;
